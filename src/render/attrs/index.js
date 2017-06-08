@@ -40,15 +40,17 @@ function stringifyCustom (attr, value) {
 }
 
 function stringifyBoolean ({ attributeName: name, mustUseProperty }, value) {
+  if (!value) {
+    return "";
+  }
+
   let val;
 
   if (mustUseProperty) {
-    val = toStringWithValue(name, value);
-  } else if (value) {
-    val = name;
+    return toStringWithValue(name, value);
   }
 
-  return val;
+  return name;
 }
 
 function stringifyOverloadedBoolean (name, value) {

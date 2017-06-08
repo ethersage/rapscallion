@@ -25,6 +25,7 @@ describe("attributes", () => {
     });
     it("are absent when falsy", () => {
       expect(renderAttrs({ disabled: false })).to.equal("");
+      expect(renderAttrs({ multiple: false })).to.equal("");
     });
   });
   describe("expecting objects", () => {
@@ -47,7 +48,7 @@ describe("attributes", () => {
     .to.equal(" href=\"/?this=that&amp;foo=bar\"");
   });
   it("that must be included are always included", () => {
-    expect(renderAttrs({ checked: false })).to.equal(" checked=\"false\"");
+    expect(renderAttrs({ checked: false })).to.equal("");
     expect(renderAttrs({ checked: true })).to.equal(" checked=\"true\"");
   });
   describe("expecting numbers", () => {
