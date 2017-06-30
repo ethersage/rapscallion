@@ -13,11 +13,17 @@ function next (renderer, iter, push) {
   }
 
   if (nextVal === EXHAUSTED) {
-    return EXHAUSTED;
+    return Promise.resolve(EXHAUSTED);
   } else if (nextVal instanceof Promise) {
     return nextVal
     .then(push)
-    .then(() => iter < max && next(renderer, iter + 1, push));
+    .then(() => {
+      if (iter < max) {
+        return next(renderer, iter + 1, push);
+      } else {
+        return Promise.reject("Iter is too big");
+      }
+    });
   } else {
     push(nextVal);
     return Promise.resolve(nextVal);
