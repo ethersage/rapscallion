@@ -131,4 +131,15 @@ describe("stream templates", () => {
       );
     });
   });
+  it("renders empty string", () => {
+    const tmpl = template``;
+
+    let output = "";
+    return resolveStreamOnDone(
+      tmpl.toStream(),
+      segment => output += segment
+    ).then(() => {
+      expect(output).to.equal("");
+    });
+  });
 });
